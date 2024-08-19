@@ -3,7 +3,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./server/dist",
     "rootDir": "./server/src",
     "lib": ["esnext"],
     "esModuleInterop": true,
