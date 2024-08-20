@@ -6,9 +6,12 @@ const messageRouter = Router();
 
 // Send message
 messageRouter.post(
-  "/message/send/:id",
+  "/messages/send/:id",
   protectRoute,
   messageController.sendMessage
 );
+
+//Get messages
+messageRouter.get("/messages/:id", protectRoute, messageController.getConvo);
 
 export default messageRouter;

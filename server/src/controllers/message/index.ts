@@ -45,6 +45,42 @@ const messageController = {
       });
     }
   },
+  getConvo: async (req: Request, res: Response) => {
+    try {
+      const userToChatId = req.params.id;
+      const userId = req.user.id;
+
+      const conversation = await prisma.conversation.findFirst({
+        where: {
+          userIds: {
+            hasEvery: [userId, userToChatId],
+          },
+        },
+        include: {
+          messages: {
+            orderBy: {
+              createdAt: "asc",
+            },
+          },
+        },
+      });
+
+      if (!conversation) {
+        res.status(404).json({
+          message: "No conversation",
+        });
+      }
+
+      res.status(200).json({
+        data: conversation?.messages,
+      });
+    } catch (err: any) {
+      console.log("Error while fetching conversation", err.message);
+      res.status(500).json({
+        message: "Internal server error",
+      });
+    }
+  },
 };
 
 export default messageController;
