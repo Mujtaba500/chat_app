@@ -1,6 +1,7 @@
 import { Router } from "express";
 import protectRoute from "../../middleware/protectRoute.js";
 import messageController from "../../controllers/message/index.js";
+import messageValidor from "../../validators/message/index.js";
 
 const messageRouter = Router();
 
@@ -8,6 +9,7 @@ const messageRouter = Router();
 messageRouter.post(
   "/messages/send/:id",
   protectRoute,
+  messageValidor,
   messageController.sendMessage
 );
 
