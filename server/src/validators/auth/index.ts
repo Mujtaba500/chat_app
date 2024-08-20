@@ -7,7 +7,7 @@ const authValidator = {
       username: Joi.string().min(3).max(20).required(),
       fullName: Joi.string().min(3).max(20).required(),
       password: Joi.string()
-        .pattern(new RegExp("^[a-zA-Z0-9]{6,30}$"))
+        .pattern(new RegExp("^(?=.*[A-Z])[a-zA-Z0-9]{6,30}$"))
         .required(),
     });
     const { error, value } = schema.validate(req.body);
@@ -33,7 +33,7 @@ const authValidator = {
     const schema = Joi.object({
       username: Joi.string().min(3).max(20).required(),
       password: Joi.string()
-        .pattern(new RegExp("^(?=.*[A-Z])[a-zA-Z0-9]{6,30}$"))
+        .pattern(new RegExp("^[a-zA-Z0-9]{6,30}$"))
         .required(),
     });
 

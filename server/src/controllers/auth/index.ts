@@ -1,6 +1,10 @@
 import prisma from "../../db/config.js";
 import { Request, Response } from "express";
-import { createToken, hashPassword } from "../../utils/auth.js";
+import {
+  comparePasswords,
+  createToken,
+  hashPassword,
+} from "../../utils/auth.js";
 
 const authController = {
   createUser: async (req: Request, res: Response) => {
@@ -44,13 +48,58 @@ const authController = {
           token,
         });
     } catch (err: any) {
-      console.log("Error while registering user");
+      console.log("Error while registering user", err.message);
       res.status(500).json({
         message: "Internal server error",
       });
     }
   },
-  login: async (req: Request, res: Response) => {},
+  login: async (req: Request, res: Response) => {
+    try {
+      const payload = req.body;
+      const userCheck = await prisma.user.findUnique({
+        where: {
+          username: payload.username,
+        },
+      });
+
+      if (!userCheck) {
+        return res.status(400).json({
+          message: "Invalid credentials",
+        });
+      }
+
+      const passVerify = await comparePasswords(
+        payload.password,
+        userCheck.password
+      );
+
+      if (!passVerify) {
+        return res.status(400).json({
+          message: "Invalid credentials",
+        });
+      }
+
+      const token = createToken(userCheck.id, userCheck.username);
+
+      res
+        .status(200)
+        .cookie("jwt", token, {
+          maxAge: 15 * 24 * 60 * 60 * 1000, // MS
+          httpOnly: true, // prevent xss attacks
+          sameSite: "strict",
+          secure: process.env.STAGE !== "development", // HTTPS
+        })
+        .json({
+          message: "User logged in successfully",
+        });
+    } catch (err: any) {
+      console.log("Error while logging in user", err.message);
+      res.status(500).json({
+        message: "Internal server error",
+      });
+    }
+  },
   logout: async (req: Request, res: Response) => {},
 };
 
