@@ -9,9 +9,10 @@ const app = express();
 const logger = morgan("dev");
 
 app.use(logger);
+app.use(cookieparser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieparser()); // query params encodd for us
+// query params encodd for us
 
 app.use("/api", allRoutes);
 
