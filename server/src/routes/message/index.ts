@@ -14,4 +14,7 @@ messageRouter.post(
 //Get messages
 messageRouter.get("/messages/:id", protectRoute, messageController.getConvo);
 
+// Get users for conversations
+messageRouter.get("/users", protectRoute, messageController.getUsers);
+
 export default messageRouter;

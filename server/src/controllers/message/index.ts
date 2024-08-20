@@ -81,6 +81,39 @@ const messageController = {
       });
     }
   },
+  getUsers: async (req: Request, res: Response) => {
+    try {
+      const userId = req.user.id;
+
+      const users = await prisma.user.findMany({
+        where: {
+          id: {
+            not: userId,
+          },
+        },
+        select: {
+          id: true,
+          fullName: true,
+          profilePic: true,
+        },
+      });
+
+      if (!users) {
+        res.status(404).json({
+          message: "No users found",
+        });
+      }
+
+      res.status(200).json({
+        data: users,
+      });
+    } catch (err: any) {
+      console.log("Error while fetching users", err.message);
+      res.status(500).json({
+        message: "Internal server error",
+      });
+    }
+  },
 };
 
 export default messageController;
