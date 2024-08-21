@@ -3,21 +3,19 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 
-const useSignup = () => {
+type LoginInputValues = {
+  username: string;
+  password: string;
+};
+
+const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
 
-  type SignupInputs = {
-    fullName: string;
-    username: string;
-    password: string;
-  };
-
-  const signup = async (inputs: SignupInputs) => {
+  const login = async (values: LoginInputValues) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.post("/auth/signup", inputs);
-      console.log(response);
+      const response = await axiosInstance.post("/auth/login", values);
       toast.success(response.data.message);
       setAuthUser(response.data.data);
     } catch (err: any) {
@@ -29,7 +27,7 @@ const useSignup = () => {
     }
   };
 
-  return { signup, loading };
+  return { login, loading };
 };
 
-export default useSignup;
+export default useLogin;
