@@ -2,6 +2,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 import { MessageCircle } from "lucide-react";
+import useGetMessages from "../../hooks/useGetMessages";
 import useConversation from "../../zustand/useConversations";
 
 // import { MessageCircle } from "lucide-react";
