@@ -11,7 +11,7 @@ const useSendMessage = () => {
     if (!selectedConversation) {
       return;
     }
-    setLoading(false);
+    setLoading(true);
     try {
       const data = {
         message: message,
