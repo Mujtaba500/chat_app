@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import useSignup from "../hooks/useSignup";
 
 const SignUp = () => {
-  const { signup, loading } = useSignup();
+  const { signup } = useSignup();
   const formik = useFormik({
     initialValues: {
       username: "",
