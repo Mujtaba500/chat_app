@@ -8,16 +8,17 @@ export type MessageType = {
   // shouldShake?: boolean;
 };
 
-export type ConversationType = {
-  id: string;
-  fullName: string;
-  profilePic: string;
-};
+// Saved in global types file
+// export type ConversationType = {
+//   id: string;
+//   fullName: string;
+//   profilePic: string;
+// };
 
 interface ConversationState {
-  selectedConversation: ConversationType | null;
+  selectedConversation: userType | null;
   messages: MessageType[];
-  setSelectedConversation: (conversation: ConversationType | null) => void;
+  setSelectedConversation: (conversation: userType | null) => void;
   setMessages: (messages: MessageType[]) => void;
 }
 
