@@ -3,10 +3,13 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import { useAuthContext } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { authUser, isLoading } = useAuthContext();
   console.log("authUser: ", authUser);
+
+  if (isLoading) return null;
   return (
     <>
       <div className="p-4 h-screen flex items-center justify-center">
@@ -24,6 +27,7 @@ function App() {
             element={!authUser ? <Login /> : <Navigate to={"/"} />}
           />
         </Routes>
+        <Toaster />
       </div>
     </>
   );

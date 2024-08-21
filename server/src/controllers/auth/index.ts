@@ -35,6 +35,13 @@ const authController = {
 
       const token = createToken(newUser.id, newUser.username);
 
+      const user = {
+        id: newUser.id,
+        username: newUser.username,
+        fullName: newUser.fullName,
+        profilePic: null,
+      };
+
       res
         .status(201)
         .cookie("jwt", token, {
@@ -45,7 +52,7 @@ const authController = {
         })
         .json({
           message: "User created successfully",
-          token,
+          data: user,
         });
     } catch (err: any) {
       console.log("Error while registering user", err.message);
@@ -82,6 +89,13 @@ const authController = {
 
       const token = createToken(userCheck.id, userCheck.username);
 
+      const user = {
+        id: userCheck.id,
+        username: userCheck.username,
+        fullName: userCheck.fullName,
+        profilePic: null,
+      };
+
       res
         .status(200)
         .cookie("jwt", token, {
@@ -92,6 +106,7 @@ const authController = {
         })
         .json({
           message: "User logged in successfully",
+          data: user,
         });
     } catch (err: any) {
       console.log("Error while logging in user", err.message);

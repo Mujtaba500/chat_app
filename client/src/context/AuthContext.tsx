@@ -11,9 +11,9 @@ import axiosInstance from "../axios/Axios";
 import toast from "react-hot-toast";
 
 type AuthUserType = {
+  id: string;
   username: string;
   fullName: string;
-  password: string;
   profilePic: string | null;
 };
 
@@ -39,8 +39,7 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     const fetchUser = async () => {
       try {
         const response = await axiosInstance.get("/auth/user");
-        console.log(response);
-        setAuthUser(response.data);
+        setAuthUser(response.data.data);
       } catch (err: any) {
         console.log("status: ", err.response.status);
         console.log("Error: ", err.response.data.message);
