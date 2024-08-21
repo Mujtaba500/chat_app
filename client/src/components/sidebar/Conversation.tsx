@@ -2,6 +2,8 @@ import useConversation from "../../zustand/useConversations";
 
 const Conversation = ({ conversation }: { conversation: any }) => {
   const { setSelectedConversation } = useConversation();
+
+  const isOnline = false;
   return (
     <>
       <div
@@ -10,7 +12,7 @@ const Conversation = ({ conversation }: { conversation: any }) => {
           setSelectedConversation(conversation);
         }}
       >
-        <div className="avatar online">
+        <div className={`avatar ${isOnline}`}>
           <div className="w-8 md:w-12 rounded-full">
             {!conversation.profilePic ? (
               <img src="/public/avatar.png" alt="user avatar" />

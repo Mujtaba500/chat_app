@@ -66,8 +66,8 @@ const messageController = {
       });
 
       if (!conversation) {
-        res.status(404).json({
-          message: "No conversation",
+        return res.status(200).json({
+          data: [],
         });
       }
 

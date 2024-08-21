@@ -1,13 +1,5 @@
 import { create } from "zustand";
 
-export type MessageType = {
-  id: string;
-  body: string;
-  senderId: string;
-  createdAt: string;
-  // shouldShake?: boolean;
-};
-
 // Saved in global types file
 // export type ConversationType = {
 //   id: string;
