@@ -9,6 +9,9 @@ const Messages = () => {
         <Message key={message.id} message={message} />
       ))}
       {loading ? <span className="loading loading-spinner mx-auto" /> : null}
+      {!loading && messages.length == 0 && (
+        <p className="text-slate-900">Send a message to start a conversation</p>
+      )}
     </div>
   );
 };
