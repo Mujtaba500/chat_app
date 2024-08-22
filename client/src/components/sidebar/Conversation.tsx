@@ -15,7 +15,7 @@ const Conversation = ({ conversation }: { conversation: any }) => {
         <div className={`avatar ${isOnline}`}>
           <div className="w-8 md:w-12 rounded-full">
             {!conversation.profilePic ? (
-              <img src="/public/avatar.png" alt="user avatar" />
+              <img src="/avatar.png" alt="user avatar" />
             ) : (
               <img src={conversation.profilePic} alt="user avatar" />
             )}
