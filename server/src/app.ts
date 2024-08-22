@@ -1,10 +1,9 @@
 import express from "express";
 import morgan from "morgan";
+import { app, server } from "./socket/socket.js";
 import "dotenv/config";
 import allRoutes from "./routes/allRoutes.js";
 import cookieparser from "cookie-parser";
-
-const app = express();
 
 const logger = morgan("dev");
 
@@ -22,4 +21,4 @@ app.use("/", (req, res) => {
   });
 });
 
-export default app;
+export default server;
